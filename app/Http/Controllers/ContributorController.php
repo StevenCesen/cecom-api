@@ -53,7 +53,7 @@ class ContributorController extends Controller
     {   
         //echo Contributor::findOrFail($id)->users;
         $user=$id->find($id->id)->user[0];
-        $user->cert=base64_encode(file_get_contents('certs/'.$id->signature_path));
+        $user->cert=($id->certificate!=null) ? base64_encode(file_get_contents('certs/'.$id->signature_path)) : "";
         $user->establishment=$user->find($user->id)->establishment;
         
         //Usuario más reciente

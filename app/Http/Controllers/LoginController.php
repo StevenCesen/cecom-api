@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     public function login(Request $request){
         
-        $user=User::where('email',$request->username)->first();
+        $user=User::where('email',$request->email)->first();
 
         if($user && password_verify($request->password,$user->password)){
             $token=$user->createToken('login',['voucher:all']);
