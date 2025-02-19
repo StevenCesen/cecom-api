@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="2.1.0">
+<infoTributaria>
+<ambiente>1</ambiente>
+<tipoEmision>1</tipoEmision>
+<razonSocial>CESEN PACCHA STEVEN RAFAEL</razonSocial>
+<nombreComercial>INTELIVE</nombreComercial>
+<ruc>1150575338001</ruc>
+<claveAcceso>1602202501115057533800110010010000001541224567814</claveAcceso>
+<codDoc>01</codDoc>
+<estab>001</estab>
+<ptoEmi>001</ptoEmi>
+<secuencial>000000154</secuencial>
+<dirMatriz>AV. MANUEL AGUSTIN AGUIRRE Y MAXIMILIANO RODRIGUEZ</dirMatriz>
+</infoTributaria>
+<infoFactura>
+<fechaEmision>16/02/2025</fechaEmision>
+<dirEstablecimiento>AV. MANUEL AGUSTIN AGUIRRE Y MAXIMILIANO RODRIGUEZ</dirEstablecimiento>
+<obligadoContabilidad>NO</obligadoContabilidad>
+<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+<razonSocialComprador>PACCHA LOPEZ LIBIA MARIA</razonSocialComprador>
+<identificacionComprador>1103381982</identificacionComprador>
+<totalSinImpuestos>20</totalSinImpuestos>
+<totalDescuento>0</totalDescuento>
+<totalConImpuestos>
+<totalImpuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>4</codigoPorcentaje>
+<baseImponible>20</baseImponible>
+<valor>3</valor>
+</totalImpuesto>
+</totalConImpuestos>
+<propina>0</propina>
+<importeTotal>23</importeTotal>
+<moneda>DOLAR</moneda>
+<pagos>
+<pago>
+<formaPago>01</formaPago>
+<total>23</total>
+</pago>
+</pagos>
+</infoFactura>
+<detalles>
+<detalle>
+<codigoPrincipal>2</codigoPrincipal>
+<codigoAuxiliar>2</codigoAuxiliar>
+<descripcion>ITEM ARDUINO UNO R3</descripcion>
+<cantidad>1</cantidad>
+<precioUnitario>20</precioUnitario>
+<descuento>0</descuento>
+<precioTotalSinImpuesto>20</precioTotalSinImpuesto>
+<impuestos>
+<impuesto>
+<codigo>2</codigo>
+<codigoPorcentaje>4</codigoPorcentaje>
+<tarifa>15</tarifa>
+<baseImponible>20</baseImponible>
+<valor>3</valor>
+</impuesto>
+</impuestos>
+</detalle>
+</detalles>
+<infoAdicional>
+<campoAdicional nombre="Email">libia@gmail.com</campoAdicional>
+<campoAdicional nombre="Telefono">0978950498</campoAdicional>
+<campoAdicional nombre="Direccion">ZALAPA - LAS LAGUNAS</campoAdicional>
+</infoAdicional>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature81461">
+<ds:SignedInfo Id="Signature-SignedInfo86449">
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
+<ds:Reference Id="SignedPropertiesID635569" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature81461-SignedProperties853687">
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>kATm6dqphc2WHr8T0hVEjCyctug=</ds:DigestValue>
+</ds:Reference>
+<ds:Reference URI="#Certificate933875">
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>sr8eVCa2Hhm6jKI0QXb1mZxX8N8=</ds:DigestValue>
+</ds:Reference>
+<ds:Reference Id="Reference-ID-95233" URI="#comprobante">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>pvPd0UgvfhaM5Chy4nTnboZYd2g=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue Id="SignatureValue301464">
+tsC1Zz4c45D+Ayueon2QMhODGtvijga+Zk4NXs3Qol02lHkbSb6t0KtQFfIBDB2F+JQ4vfHjS+AK
++fvyepptxcFPQdGFQwgUPuY/i6lakgTaaFtmK7syR+RBXqKFq6iIFY3XTOkyivYRoGF5bRRwdVBW
+x6Cu9gMPTwwrb9vo8oVGF5c4lQnMzYrJrjPkSwq+rqGAZEUNdm53c0N5xsWYOmIjULiRwJOfhce/
+T1eZQYegG/rlZkgwSZObyF5R9oKpJ57GWJ2VjWxBNS5eoEreIn9fQDJ9EBD61SfsQ18yzVdbxD/i
+Rm2J0DyTwzBYj6sBBsI+1FvwGa2kjhUGa2Zj3Q==
+</ds:SignatureValue>
+<ds:KeyInfo Id="Certificate933875">
+<ds:X509Data>
+<ds:X509Certificate>
+MIIJDjCCBvagAwIBAgIIEDlRDwVvn4gwDQYJKoZIhvcNAQELBQAwgbgxCzAJBgNVBAYTAkVTMUQw
+QgYDVQQHDDtCYXJjZWxvbmEgKHNlZSBjdXJyZW50IGFkZHJlc3MgYXQgd3d3LnVhbmF0YWNhLmNv
+bS9hZGRyZXNzKTEWMBQGA1UECgwNVUFOQVRBQ0EgUy5BLjEVMBMGA1UECwwMVFNQLVVBTkFUQUNB
+MRowGAYDVQQDDBFVQU5BVEFDQSBDQTIgMjAxNjEYMBYGA1UEYQwPVkFURVMtQTY2NzIxNDk5MB4X
+DTI1MDIwODE4MDcwMFoXDTI3MDIwODE4MDcwMFowgZoxCzAJBgNVBAYTAkVDMRUwEwYDVQQEDAxD
+RVNFTiBQQUNDSEExFjAUBgNVBCoMDVNURVZFTiBSQUZBRUwxGTAXBgNVBAUTEElEQ0VDLTExNTA1
+NzUzMzgxIzAhBgNVBAMMGlNURVZFTiBSQUZBRUwgQ0VTRU4gUEFDQ0hBMRwwGgYDVQRhDBNUSU5F
+Qy0xMTUwNTc1MzM4MDAxMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxKuiUjSDbDES
+P0xVmEbWaabFprdjzHTgVPbZfkqMJdYU4NbZhAwS/ytd6if42m0mezjleC1aQh7KeZgs9sgRfghg
+xDVYyjhT+Xg1ss29Uz8Vc9RBx4mNujqvdrF7qMcbWaFSdTMbNCWyDRVcu1qeCsviGQAJhGtTORch
+ARoxeUNpI5g/ajlRj/bmBYMlPmtry6WSQ5YhGA5lzQ6qjkBJdt+x20lP+eW8HIja4+Xg+AlmKj7M
+sGzTtg/d1jgT1DniuOz6/6LTySRvpc8GXvduPtDwthb81BIOR7tUYdt2wARSB6939wgjcgnuSjiY
+MEAp/RtOhHLp5EaJlQHVxJ1sDQIDAQABo4IENjCCBDIwGwYLKwYBBAGC8TZmAwEEDAwKMTE1MDU3
+NTMzODAeBgsrBgEEAYLxNmYDCwQPDA0xMTUwNTc1MzM4MDAxMIHXBggrBgEFBQcBAQSByjCBxzBV
+BggrBgEFBQcwAoZJaHR0cDovL3d3dy51YW5hdGFjYS5jb20vcHVibGljL2Rvd25sb2FkL3RzcF9j
+ZXJ0aWZpY2F0ZXMvc3Vib3JkaW5hdGUxLmNydDA2BggrBgEFBQcwAYYqaHR0cDovL29jc3AxLnVh
+bmF0YWNhLmNvbS9wdWJsaWMvcGtpL29jc3AvMDYGCCsGAQUFBzABhipodHRwOi8vb2NzcDIudWFu
+YXRhY2EuY29tL3B1YmxpYy9wa2kvb2NzcC8wHQYDVR0OBBYEFPK/bbPhOwRQcw5nBBSjNpAUh3mZ
+MAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUfVfnYHPOB0ap4qNo8OERsnSSc/0wgZkGA1UdIASB
+kTCBjjCBiwYMKwYBBAGC8TZmAgEBMHswNwYIKwYBBQUHAgEWK2h0dHBzOi8vd3d3LnVhbmF0YWNh
+LmNvbS9wdWJsaWMvcGtpL2RwYy1lYy8wQAYIKwYBBQUHAgIwNAwyQ0VSVElGSUNBRE8gREUgUEVS
+U09OQSBOQVRVUkFMIE8gRklTSUNBIEVOIEFSQ0hJVk8wgY8GA1UdHwSBhzCBhDBAoD6gPIY6aHR0
+cDovL2NybDEudWFuYXRhY2EuY29tL3B1YmxpYy9wa2kvY3JsL0NBMnN1Ym9yZGluYWRhLmNybDBA
+oD6gPIY6aHR0cDovL2NybDIudWFuYXRhY2EuY29tL3B1YmxpYy9wa2kvY3JsL0NBMnN1Ym9yZGlu
+YWRhLmNybDAOBgNVHQ8BAf8EBAMCBeAwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMEMIIB
+bAYDVR0RBIIBYzCCAV+BGnN0ZXZlbi5yLmNlc2VuQGhvdG1haWwuY29toBsGCysGAQQBgvE2ZgMB
+oAwMCjExNTA1NzUzMzigHgYLKwYBBAGC8TZmAwKgDwwNU1RFVkVOIFJBRkFFTKAWBgsrBgEEAYLx
+NmYDA6AHDAVDRVNFTqAXBgsrBgEEAYLxNmYDBKAIDAZQQUNDSEGgIAYLKwYBBAGC8TZmAwegEQwP
+UElDSElOQ0hBIFFVSVRPoB8GCysGAQQBgvE2ZgMIoBAMDjAwNTkzOTc4OTUwNDk4oBYGCysGAQQB
+gvE2ZgMJoAcMBVFVSVRPoB4GCysGAQQBgvE2ZgMLoA8MDTExNTA1NzUzMzgwMDGgEwYLKwYBBAGC
+8TZmAwygBAwCRUOgKQYLKwYBBAGC8TZmAzKgGgwYUEVSU09OQSBOQVRVUkFMIE8gRklTSUNBoBgG
+CysGAQQBgvE2ZgMzoAkMB0FSQ0hJVk8wDQYJKoZIhvcNAQELBQADggIBAHtinn4WxDQ6BBL4WgGX
+Vdk7OG4kmbTuxTvbR0J+Euxbp+bUpL33Hkp+klT4QJOFH2wsVwccimfkxQwAYrxS8hy8TqWi1ZZR
+P0wW/hg+4716XhbqZEDAGBKIALusFXrQdBq3MPYQLMKMHE1sZscxs2UkutHsuYhwjLV8N6dgltem
+rch6spxNpjvAP2Lj/AM4Vr6TnwA4c0WcSRqZwewwDwrFVY4Fd+uRwc9G6r3TZ43IvE/BDtY1ac9r
+jIyuFRihNWRelZipD5P0HFJ0PuYYJOphqCNMwWx1uJ3VNbj8ggJqn+LQfHo7n9c54FAkL7y2y8GE
+0wk5OYmjzPcYKBPC7KCBV/CIXBGMhzCqSni8ZZvqfOsbAcW/Ie01GlDIFLXZAgE0LRv0P+cQ3yxY
+tix5VeBUNC5j+k6Fsg/WgNXqYP1/4W4mrpl3biwBzm2GUgglkQc+rdF4+/nfxZFBI9IcAmlZXYMb
+c9s2xVemUwsaKBIsjD+D6DcGI3KiWZy++AtlmR70AGSFUQabQMP5pjLWR5AiDY1X4eyoWjZaxjym
+BYfDn1toQfvxWNlxWdgBwX5Ryo7klFxPZF8hZO+pANPjLVWCZsU0muaivfuRWAG+7SjKUcISFQ/g
+kb068U31CC8hp/NQMbYKOmduJeIHj9bt6g8ETmJMHhowArLJrqwqnVT5
+</ds:X509Certificate>
+</ds:X509Data>
+<ds:KeyValue>
+<ds:RSAKeyValue>
+<ds:Modulus>
+xKuiUjSDbDESP0xVmEbWaabFprdjzHTgVPbZfkqMJdYU4NbZhAwS/ytd6if42m0mezjleC1aQh7K
+eZgs9sgRfghgxDVYyjhT+Xg1ss29Uz8Vc9RBx4mNujqvdrF7qMcbWaFSdTMbNCWyDRVcu1qeCsvi
+GQAJhGtTORchARoxeUNpI5g/ajlRj/bmBYMlPmtry6WSQ5YhGA5lzQ6qjkBJdt+x20lP+eW8HIja
+4+Xg+AlmKj7MsGzTtg/d1jgT1DniuOz6/6LTySRvpc8GXvduPtDwthb81BIOR7tUYdt2wARSB693
+9wgjcgnuSjiYMEAp/RtOhHLp5EaJlQHVxJ1sDQ==
+</ds:Modulus>
+<ds:Exponent>AQAB</ds:Exponent>
+</ds:RSAKeyValue>
+</ds:KeyValue>
+</ds:KeyInfo>
+<ds:Object Id="Signature81461-Object843483"><etsi:QualifyingProperties Target="#Signature81461"><etsi:SignedProperties Id="Signature81461-SignedProperties853687"><etsi:SignedSignatureProperties><etsi:SigningTime>2025-02-16T05:39:18</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>sADYUgVket2dr/a2ZJ1Yx51y4HM=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>2.5.4.97=#0c0f56415445532d413636373231343939,CN=UANATACA CA2 2016,OU=TSP-UANATACA,O=UANATACA S.A.,L=Barcelona (see current address at www.uanataca.com/address),C=ES</ds:X509IssuerName><ds:X509SerialNumber>1169054703236915080</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-95233"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature></factura>
