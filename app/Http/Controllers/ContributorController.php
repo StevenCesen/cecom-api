@@ -62,6 +62,24 @@ class ContributorController extends Controller
         return $user;
     }
 
+    public function showResumeStadistics(Request $request,Contributor $id)
+    {
+
+        $now=date('Y-m-d',time()-18000);
+        $yesterday=explode('-',date('Y-m-d',time()-18000));
+        $yesterday=$yesterday[0].'-'.$yesterday[1].'-'.(($yesterday[2]-1<10) ? '0'.$yesterday[2]-1 : $yesterday[2]-1);
+        $month=date('Y-m',time()-18000);
+
+        $id->total_now=$id->found($id->id)->voucher()->where('create_date','REGEXP',$now)->sum('total_amount');
+        $id->total_yesterday=$id->found($id->id)->voucher()->where('create_date','REGEXP',$yesterday)->sum('total_amount');
+        $id->total_month=$id->found($id->id)->voucher()->where('create_date','REGEXP',$month)->sum('total_amount');;
+        $id->products=$id->found($id->id)->product()->count();
+        $id->clients=$id->found($id->id)->client()->count();
+        $id->vouchers=$id->found($id->id)->voucher()->count();
+        
+        return $id;
+    }
+
     public function bchexdec($hex){
         $dec = 0;
         $len = strlen($hex);
