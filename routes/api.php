@@ -3,7 +3,9 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContributorController;
 use App\Http\Controllers\EstablishmentController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
@@ -41,7 +43,21 @@ Route::post('/products',[ProductController::class,'store']);
 Route::put('/products/{id}',[ProductController::class,'update']);
 Route::delete('/products/{id}',[ProductController::class,'destroy']);
 
-// ========================= EndPoints para PRODUCTOS ===============================
+// ========================= EndPoints para MENÚS ===============================
+Route::get('/contributors/{id}/menus',[MenuController::class,'index']);
+Route::get('/menus/{id}',[MenuController::class,'show']);
+Route::post('/menus',[MenuController::class,'store']);
+Route::put('/menus/{id}',[MenuController::class,'update']);
+Route::delete('/menus/{id}',[MenuController::class,'destroy']);
+
+// ========================= EndPoints para ITEMS ===============================
+Route::get('/contributors/{id}/items',[ItemController::class,'index']);
+Route::get('/items/{id}',[ItemController::class,'show']);
+Route::post('/items',[ItemController::class,'store']);
+Route::put('/items/{id}',[ItemController::class,'update']);
+Route::delete('/items/{id}',[ItemController::class,'destroy']);
+
+// ========================= EndPoints para CATEGORÍAS ===============================
 Route::get('/contributors/{id}/types',[TypeController::class,'index']);
 Route::post('/types',[TypeController::class,'store']);
 

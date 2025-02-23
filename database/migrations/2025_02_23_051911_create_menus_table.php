@@ -14,6 +14,15 @@ return new class extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name');
+            $table->string('status');
+            $table->string('create_date');
+            $table->foreignId('contributor_id');
+            $table->foreign('contributor_id')
+                ->references('id')
+                ->on('contributors')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

@@ -16,15 +16,14 @@ $printer->setJustification(Printer::JUSTIFY_CENTER);
 
 $printer->setTextSize(3, 2);
 
-$printer->text("LOXA FIDELIS");
+$printer->text($data->commercial_name);
 $printer->feed(2);
 $printer->setJustification(Printer::JUSTIFY_LEFT);
 $printer->setTextSize(1, 1);
-$printer->text("\n Razón Social: PAREDES QUEVEDO DIEGO DANIEL");
-$printer->text("\n RUC: 1104683294001");
-$printer->text("\n Teléfono: 0990371350");
-$printer->text("\n Email: gerencia@loxafidelis.com");
-$printer->text("\n Web: loxafidelis.com");
+$printer->text("\n Razón Social: $data->name");
+$printer->text("\n RUC: $data->identification");
+$printer->text("\n Teléfono: $data->phone");
+$printer->text("\n Email: $data->email");
 $printer->text("\n Fecha: ".date('Y/m/d H:i:s',time()-25100));
 
 $printer->feed(2);
