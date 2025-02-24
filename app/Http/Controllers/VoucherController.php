@@ -8,6 +8,7 @@ use App\Models\Establishment;
 use App\Models\Product;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class VoucherController extends Controller
 {
@@ -120,7 +121,51 @@ class VoucherController extends Controller
         }
 
         $create_voucher=Voucher::create($data);
-
+        $contributor=Contributor::where('id',$request->contributor_id)->first();
+        
+        //  Guardamos el RIDE
+        $invoice=Pdf::loadView('ride',[
+            'items'=>$request->detail,
+            'commercial_name'=>$contributor->commercial_name,
+            'name'=>$contributor->name,
+            'identification'=>$contributor->identification,
+            'email'=>'',
+            'access_key'=>$request->access_key,
+            'sequential'=>$request->sequential,
+            'direction'=>$contributor->direction,
+            'date'=>$request->create_date,
+            'phone'=>$contributor->phone,
+            'regimen'=>$contributor->regimen,
+            'oc'=>false,
+            'client_name'=>$request->client_name,
+            'client_ci'=>$request->client_identification,
+            'client_email'=>$request->client_email,
+            'client_direction'=>$request->client_direction,
+            'subtotal'=>$request->subtotal_amount,
+            'iva15'=>$request->tax_value,
+            'iva5'=>0,
+            'ice'=>0,
+            'dscto'=>0,
+            'total'=>$request->total_amount,
+            'propina'=>0,
+            'pay_ways'=>json_encode([
+                [
+                    'way'=>'SIN UTILIZACION DEL SISTEMA FINANCIERO',
+                    'value'=>$request->total_amount,
+                    'amount'=>30,
+                    'way_time'=>'DIAS'
+                ]
+            ]),
+            'adicional'=>json_encode([
+                [
+                    'field'=>'Telf',
+                    'value'=>$request->client_phone
+                ]
+            ])
+        ]);
+        
+        file_put_contents('ride_clients/'.$contributor->identification.'/'.$request->access_key.'.pdf', $invoice->output());
+        
         return response()->json([
             "status"=>200,
             "message"=>"Factura generada correctamente.",

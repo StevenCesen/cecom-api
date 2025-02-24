@@ -6,6 +6,7 @@ use App\Http\Controllers\EstablishmentController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
@@ -76,3 +77,6 @@ Route::get('/vouchers/{id}',[VoucherController::class,'show']);
 Route::post('/vouchers',[VoucherController::class,'store']);
 Route::put('/vouchers/{id}',[VoucherController::class,'update']);
 Route::delete('/vouchers/{id}',[VoucherController::class,'destroy']);
+
+// ========================= EndPoints para DOCUMENTOS ===============================
+Route::get('/ride',[PDFController::class,'generateRIDE']);
