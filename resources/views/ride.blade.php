@@ -221,12 +221,12 @@
         </tr>
         @foreach(json_decode($items) as $item)
             <tr>
-                <td>{{ $item->quantity }}</td>
+                <td>{{ $item->cantidad }}</td>
                 <td>{{ $item->codigo }}</td>
-                <td style="text-align: left;word-wrap: break-word;width:100%;">{{ $item->name }}</td>
-                <td style="text-align: left;word-wrap: break-word;width:100%;">{{ $item->info }}</td>
-                <td>{{ $item->subtotal }}</td>
-                <td>{{ $item->dscto }}</td>
+                <td style="text-align: left;word-wrap: break-word;width:100%;">{{ $item->nombre }}</td>
+                <td style="text-align: left;word-wrap: break-word;width:100%;">{{ $item->descripcion }}</td>
+                <td>{{ $item->precio_unitario }}</td>
+                <td>{{ $item->descuento }}</td>
                 <td>{{ $item->importe }}</td>
             </tr>
         @endforeach
