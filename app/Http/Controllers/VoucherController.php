@@ -126,6 +126,9 @@ class VoucherController extends Controller
         $contributor=Contributor::where('id',$request->contributor_id)->first();
 
         //  Guardamos el RIDE
+        $generator = new \Picqer\Barcode\BarcodeGeneratorHTML();
+        $barcode = $generator->getBarcode($request->access_key, $generator::TYPE_CODE_128,1.75);
+        
         $invoice=Pdf::loadView('ride',[
             'items'=>$request->detail,
             'commercial_name'=>$contributor->commercial_name,
@@ -163,11 +166,12 @@ class VoucherController extends Controller
                     'field'=>'Telf',
                     'value'=>$request->client_phone
                 ]
-            ])
+                ]),
+            'barcode'=>$barcode
         ]);
         
         file_put_contents('ride_clients/'.$contributor->identification.'/'.$request->access_key.'.pdf', $invoice->output());
-        
+
         // Enviamos el correo electrónico
         Mail::to($request->client_email)->send(new SendMailable);
         

@@ -12,6 +12,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "phpmailer/phpmailer": "^6.9",
+        "picqer/php-barcode-generator": "^3.2",
         "spatie/laravel-pdf": "^1.5"
     },
     "require-dev": {

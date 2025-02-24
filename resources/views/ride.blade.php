@@ -35,8 +35,8 @@
         .Ride__head>tr>td{
             display: block;
             text-align: start;
-            width: 50% !important;
         }
+        
         .Ride__logo{
             width: 150px;
             height: 150px;
@@ -77,6 +77,10 @@
             border-radius: 20px;
             padding: 10px 10px;
             box-sizing: border-box;
+        }
+
+        .Ride__datesDoc>div>img{
+            width: 100%;
         }
 
         .Ride__marginTop{
@@ -145,7 +149,7 @@
     <!-- 1) Encabezado del RIDE -->
     <table class="Ride__head">
         <tr>
-            <td>
+            <td style="width:50%;">
                 <div class="Ride__logo">
                     <img src="{{ 'data:image/png'. ';base64,' . base64_encode(file_get_contents('https://softsen.space/anyplace/public/logos/1150575338001.png')) }}">
                 </div>
@@ -172,7 +176,7 @@
                     {{ $oc==true ? '<strong>OBLIGADO A LLEVAR CONTABILIDAD</strong>' : '' }}
                 </div>
             </td>
-            <td>
+            <td style="width:50%;">
                 <div class="Ride__datesDoc">
                     <h3>R.U.C.: {{ $identification }}</h3>
                     <h3>AMBIENTE: PRODUCCIÓN</h3>
@@ -182,6 +186,8 @@
                     <p class="Ride__marginBottom">{{ $access_key }}</p>
                     <p class="Ride__marginBottom"><strong>Fecha y hora de autorización: </strong>{{ $date }}</p>
                     <p><strong>Régimen: </strong>{{ $regimen }}</p>
+                    <div class="Ride__marginTop" style="width:200px;">{!! $barcode !!}</div>
+                    <p>{{ $access_key }}</p>
                 </div>
             </td>
         </tr>

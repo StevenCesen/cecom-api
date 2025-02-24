@@ -181,8 +181,8 @@ class PDFController extends Controller
             ),
             array(
                 'codigo'=>'ITEM_2',
-                'name'=>'PRODUCTO 2',
-                'quantity'=>1,
+                'nombre'=>'PRODUCTO 2',
+                'cantidad'=>1,
                 'subtotal'=>5.00,
                 'iva'=>'IVA 15',
                 'info'=>'',
@@ -217,6 +217,9 @@ class PDFController extends Controller
             ]
         ];
 
+        $generator = new \Picqer\Barcode\BarcodeGeneratorHTML();
+        $barcode = $generator->getBarcode('1602202501115057533800110010010000001551224567811', $generator::TYPE_CODE_128,1.75);
+
         $data=[
             'items'=>json_encode($items),
             'commercial_name'=>'INTELIVE',
@@ -242,11 +245,12 @@ class PDFController extends Controller
             'total'=>17.25,
             'propina'=>0,
             'pay_ways'=>json_encode($pay_way),
-            'adicional'=>json_encode($adicional)
+            'adicional'=>json_encode($adicional),
+            'barcode'=>$barcode
         ];
 
         $invoice=Pdf::loadView('ride',$data);
         
-        return $invoice->output();
+        return $invoice->download('prueba.pdf');
     }
 }
