@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMailable;
 use App\Models\Client;
 use App\Models\Contributor;
 use App\Models\Establishment;
@@ -9,6 +10,7 @@ use App\Models\Product;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Mail;
 
 class VoucherController extends Controller
 {
@@ -165,6 +167,9 @@ class VoucherController extends Controller
         ]);
         
         file_put_contents('ride_clients/'.$contributor->identification.'/'.$request->access_key.'.pdf', $invoice->output());
+        
+        // Enviamos el correo electrónico
+        Mail::to($request->client_email)->send(new SendMailable);
         
         return response()->json([
             "status"=>200,
