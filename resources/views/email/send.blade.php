@@ -7,9 +7,9 @@
     <title>Facturación</title>
 </head>
 <body>
-    <h4>Señor(a)</h4>
-    <p>Adjunto se encuentra su comprobante electrónico emitido por {{request('client_name')}}, por concepto de {{ request('concept') }}.</p>
-
+    <h4>Señor(a) {{ request('client_name') }}</h4>
+    <p>Adjunto se encuentra su comprobante electrónico emitido por {{request('contributor_name')}}, por concepto de {{ request('concept') }}.</p>
+    
     <footer>
         <cite>Mensaje enviado por el sistema de facturación electrónica ANYPLACE</cite>
     </footer>
