@@ -215,7 +215,7 @@ class VoucherController extends Controller
     public function show(Voucher $id)
     {
         $id->client=$id->find($id->id)->client;
-        $id->contributor_identification=$id->find($id->id)->contributor()->identification;
+        $id->contributor_identification=$id->find($id->id)->contributor;
         return $id;
     }
 
