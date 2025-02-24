@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMailable;
 use Illuminate\Http\Request;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
 {
@@ -43,4 +45,14 @@ class MailController extends Controller
                 return back()->with('error','Message could not be sent.');
         }
     }
+
+    public function sendMail(Request $request){
+        Mail::to($request->client_email)->send(new SendMailable);
+
+        return response()->json([
+            "status"=>200,
+            "message"=>"Documento enviado correctamente."
+        ],200);
+    }
+
 }

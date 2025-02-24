@@ -5,6 +5,7 @@ use App\Http\Controllers\ContributorController;
 use App\Http\Controllers\EstablishmentController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProductController;
@@ -80,3 +81,4 @@ Route::delete('/vouchers/{id}',[VoucherController::class,'destroy']);
 
 // ========================= EndPoints para DOCUMENTOS ===============================
 Route::get('/ride',[PDFController::class,'generateRIDE']);
+Route::post('/sendInvoice',[MailController::class,'sendMail']);
