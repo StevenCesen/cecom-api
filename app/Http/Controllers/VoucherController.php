@@ -122,7 +122,7 @@ class VoucherController extends Controller
 
         $create_voucher=Voucher::create($data);
         $contributor=Contributor::where('id',$request->contributor_id)->first();
-        
+
         //  Guardamos el RIDE
         $invoice=Pdf::loadView('ride',[
             'items'=>$request->detail,
@@ -214,6 +214,7 @@ class VoucherController extends Controller
      */
     public function show(Voucher $id)
     {
+        $id->client=$id->find($id->id)->client;
         return $id;
     }
 
