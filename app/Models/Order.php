@@ -31,6 +31,10 @@ class Order extends Model
     public function user(){
         return $this->hasOne(User::class);
     }
+
+    public function itemcart(){
+        return $this->hasMany(Itemcart::class);
+    }
     
     public function contributor(){
         return $this->belongsTo(Contributor::class);

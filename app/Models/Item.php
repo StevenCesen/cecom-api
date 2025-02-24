@@ -20,4 +20,5 @@ class Item extends Model
     public function menu(){
         return $this->belongsTo(Menu::class);
     }
+
 }

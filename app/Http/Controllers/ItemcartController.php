@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class ItemcartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +19,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //  Creamos la orden
-
-        
-
-        //  Insertamos los productos de la orden
+        //
     }
 
     /**
