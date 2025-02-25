@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contributor;
+use App\Models\Itemcart;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -9,9 +12,30 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Contributor $id)
     {
-        //
+        return $id->find($id->id)
+            ->order()
+            ->when(request()->filled('status'),function($query){
+                $query->where('status',request('status'));
+            })
+            ->when(request()->filled('client_name'),function($query){
+                $query->where('client_name',request('client_name'));
+            })
+            ->when(request()->filled('date'),function($query){
+                $query->where('create_date','<=',request('date'));
+            })
+            ->orderBy('create_date','DESC')
+            ->paginate(10);
+    }
+
+    public function getNumOrderDay($contributor_id){
+        $last_order=Order::where('contributor_id',$contributor_id)
+            ->where('create_date','REGEXP',date('Y/m/d',time()-18000))
+            ->orderBy('create_date','DESC')
+            ->first();
+
+        return ($last_order==null) ? 1 : ($last_order->order_number_day+1);
     }
 
     /**
@@ -20,10 +44,41 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //  Creamos la orden
+        $data_order=[
+            'floor'=>$request->client_piso,
+            'table'=>$request->client_mesa,
+            'create_date'=>date('Y/m/d H:i:s',time()-18000),
+            'details'=>"",
+            'notes'=>"",
+            'status'=>"PENDIENTE",
+            'client_name'=>$request->client_name,
+            'client_identification'=>"",
+            'order_number_day'=>$this->getNumOrderDay($request->contributor_id),
+            'user_id'=>$request->user_id,
+            'contributor_id'=>$request->contributor_id
+        ];
 
-        
+        $create_order=Order::create($data_order);
 
         //  Insertamos los productos de la orden
+        $items=json_decode($request->items);
+
+        foreach($items as $item){
+            $data_item=[
+                'notes'=>$item->notes,
+                'quantity'=>$item->quantity,
+                'complements'=>"",
+                'item_id'=>$item->id,
+                'order_id'=>$create_order->id
+            ];
+            
+            Itemcart::create($data_item);
+        }
+
+        return response()->json([
+            "status"=>200,
+            "message"=>"Comanda generada correctamente.",
+        ],200);
     }
 
     /**

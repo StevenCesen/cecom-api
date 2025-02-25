@@ -7,6 +7,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TypeController;
@@ -82,3 +83,10 @@ Route::delete('/vouchers/{id}',[VoucherController::class,'destroy']);
 // ========================= EndPoints para DOCUMENTOS ===============================
 Route::get('/ride',[PDFController::class,'generateRIDE']);
 Route::post('/sendInvoice',[MailController::class,'sendMail']);
+
+// ========================= EndPoints para COMANDAS ===============================
+Route::get('/contributors/{id}/orders',[OrderController::class,'index']);
+Route::get('/orders/{id}',[OrderController::class,'show']);
+Route::post('/orders',[OrderController::class,'store']);
+Route::put('/orders/{id}',[OrderController::class,'update']);
+Route::delete('/orders/{id}',[OrderController::class,'destroy']);
