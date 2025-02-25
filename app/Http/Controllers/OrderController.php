@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index(Contributor $id)
     {
-        return $id->find($id->id)
+        $orders=$id->find($id->id)
             ->order()
             ->when(request()->filled('status'),function($query){
                 $query->where('status',request('status'));
@@ -27,6 +27,12 @@ class OrderController extends Controller
             })
             ->orderBy('create_date','DESC')
             ->paginate(10);
+        
+        foreach($orders as $order){
+            $order->items=$order->find($order->id)->itemcart;
+        }
+
+        return $orders;
     }
 
     public function getNumOrderDay($contributor_id){
