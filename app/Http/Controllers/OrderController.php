@@ -110,6 +110,7 @@ class OrderController extends Controller
         return response()->json([
             "status"=>200,
             "message"=>"Comanda generada correctamente.",
+            "resultado"=>$resultado
         ],200);
     }
 
