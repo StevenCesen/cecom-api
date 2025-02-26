@@ -26,6 +26,9 @@ class OrderController extends Controller
             ->when(request()->filled('date'),function($query){
                 $query->where('create_date','<=',request('date'));
             })
+            ->when(request()->filled('user_id'),function($query){
+                $query->where('user_id','<=',request('user_id'));
+            })
             ->orderBy('create_date','DESC')
             ->paginate(10);
         
@@ -81,7 +84,7 @@ class OrderController extends Controller
             ];
             Itemcart::create($data_item);
         }
-        
+
         //  Enviamos a imprimir
         $data = http_build_query(array(
             'data'=>json_encode([
