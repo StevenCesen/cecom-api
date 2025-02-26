@@ -81,7 +81,7 @@ class OrderController extends Controller
             ];
             Itemcart::create($data_item);
         }
-
+        
         //  Enviamos a imprimir
         $data = http_build_query(array(
             'data'=>json_encode([

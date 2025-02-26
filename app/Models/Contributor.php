@@ -29,7 +29,12 @@ class Contributor extends Model
         'user_limit',
         'doc_limit',
         'estab_limit',
-        'logo_path'
+        'logo_path',
+        'public_ip',
+        'zone1_ip',
+        'zone2_ip',
+        'zone3_ip',
+        'nro_prints'
     ];
 
     /**
