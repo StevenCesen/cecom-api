@@ -90,3 +90,29 @@ Route::get('/orders/{id}',[OrderController::class,'show']);
 Route::post('/orders',[OrderController::class,'store']);
 Route::put('/orders/{id}',[OrderController::class,'update']);
 Route::delete('/orders/{id}',[OrderController::class,'destroy']);
+
+Route::get('/printest',function(){
+    $data=json_encode([
+        "cliente_name"=>"JUANITO EL CARTERO"
+    ]);
+
+    $data = http_build_query(array(
+        'data'=>$data,
+        'public_ip'=>"10.8.0.2",
+        'ip_cocina'=>"192.168.1.110",
+        'ip_caja'=>"",
+        'ip_barra'=>"",
+        'nro_impresiones'=>2
+    ));
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,"https://srv479098.hstgr.cloud/connectvpn.php");
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $resultado= curl_exec($ch);
+    curl_close($ch);
+
+    return $resultado;
+});
