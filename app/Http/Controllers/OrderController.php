@@ -84,22 +84,16 @@ class OrderController extends Controller
 
         //  Enviamos a imprimir
         $data = http_build_query(array(
-            'data'=>[
-                'floor'=>$request->client_piso,
-                'table'=>$request->client_mesa,
-                'create_date'=>date('Y/m/d H:i:s',time()-18000),
-                'items'=>$request->items,
-                'nro_order'=>$create_order->order_number_day,
-                'client_name'=>$request->client_name,
-                'order_number_day'=>$this->getNumOrderDay($request->contributor_id),
-                'user'=>User::where('id',$request->user_id)->first()->name,
-                'contributor'=>Contributor::where('id',$request->contributor_id)->first()
-            ],
-            'public_ip'=>"10.8.0.2",
-            'ip_cocina'=>"192.168.1.110",
-            'ip_caja'=>"",
-            'ip_barra'=>"",
-            'nro_impresiones'=>2
+            'floor'=>$request->client_piso,
+            'table'=>$request->client_mesa,
+            'create_date'=>date('Y/m/d H:i:s',time()-18000),
+            'items'=>$request->items,
+            'nro_order'=>$create_order->order_number_day,
+            'client_name'=>$request->client_name,
+            'order_number_day'=>$this->getNumOrderDay($request->contributor_id),
+            'user'=>User::where('id',$request->user_id)->first()->name,
+            'contributor'=>Contributor::where('id',$request->contributor_id)->first(),
+            'context'=>"cocina"
         ));
     
         $ch = curl_init();
