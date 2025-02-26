@@ -84,7 +84,8 @@ class OrderController extends Controller
 
         //  Enviamos a imprimir
         $data = http_build_query(array(
-            'floor'=>$request->client_piso,
+            'data'=>[
+                'floor'=>$request->client_piso,
             'table'=>$request->client_mesa,
             'create_date'=>date('Y/m/d H:i:s',time()-18000),
             'items'=>$request->items,
@@ -94,6 +95,7 @@ class OrderController extends Controller
             'user'=>User::where('id',$request->user_id)->first()->name,
             'contributor'=>Contributor::where('id',$request->contributor_id)->first(),
             'context'=>"cocina"
+            ]
         ));
     
         $ch = curl_init();
