@@ -98,7 +98,7 @@ class OrderController extends Controller
                 'order_number_day'=>$this->getNumOrderDay($request->contributor_id),
                 'user'=>User::where('id',$request->user_id)->first()->name,
                 'contributor'=>Contributor::where('id',$request->contributor_id)->first(),
-                'context'=>"comanda"
+                'context'=>"caja"
             ])
         ));
     
