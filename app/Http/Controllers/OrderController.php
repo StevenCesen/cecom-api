@@ -29,6 +29,7 @@ class OrderController extends Controller
             ->when(request()->filled('user_id'),function($query){
                 $query->where('user_id','<=',request('user_id'));
             })
+            ->where('status','PENDIENTE')
             ->orderBy('create_date','DESC')
             ->paginate(10);
         
@@ -97,7 +98,7 @@ class OrderController extends Controller
                 'order_number_day'=>$this->getNumOrderDay($request->contributor_id),
                 'user'=>User::where('id',$request->user_id)->first()->name,
                 'contributor'=>Contributor::where('id',$request->contributor_id)->first(),
-                'context'=>"cocina"
+                'context'=>"comanda"
             ])
         ));
     
