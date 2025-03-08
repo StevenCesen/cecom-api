@@ -123,7 +123,7 @@ class VoucherController extends Controller
                     'name'=>$producto->name,
                     'notes'=>$producto->notes,
                     'price'=>$producto->price,
-                    'quantity'=>$producto->quantity,
+                    'quantity'=>$item->quantity,
                     'complements'=>"",
                     'item_id'=>$producto->id
                 ]);
