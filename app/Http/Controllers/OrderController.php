@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contributor;
+use App\Models\Item;
 use App\Models\Itemcart;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -121,9 +123,21 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show(Order $id)
+    {   
+        $id->details=$id->find($id->id)->itemcart;
+
+        foreach($id->details as $item){
+            // $it=Item::where($item->item_id)->first();
+            $product=Product::where($item->item_id)->first();
+            $item->name=$product->name;
+            $item->description=$product->description;
+            $item->tax=$product->tax;
+            $item->price=$product->price;
+        }
+
+        $id->contributor=$id->find($id->id)->contributor;
+        return $id;
     }
 
     /**

@@ -112,10 +112,20 @@ class VoucherController extends Controller
 
         //  Actualizamos el stock de productos
         if(isset($request->detail)){
+            $items=[];
             $detalle=json_decode($request->detail);
 
             foreach($detalle as $item){
                 $producto=Product::where('id',$item->codigo)->first();
+
+                array_push($items,[
+                    'name'=>$producto->name,
+                    'notes'=>$producto->notes,
+                    'quantity'=>$producto->quantity,
+                    'complements'=>"",
+                    'item_id'=>$producto->id
+                ]);
+
                 Product::where('id',$item->codigo)->update([
                     "quantity"=>intval($producto->quantity)-intval($item->cantidad)
                 ]);
@@ -174,6 +184,30 @@ class VoucherController extends Controller
 
         // Enviamos el correo electrónico
         Mail::to($request->client_email)->send(new SendMailable);
+
+        //  Enviamos a imprimir
+        $data = http_build_query(array(
+            'data'=>json_encode([
+                'commercial_name'=>$contributor->commercial_name,
+                'table'=>$request->client_mesa,
+                'create_date'=>date('Y/m/d H:i:s',time()-18000),
+                'items'=>$items,
+                'nro_order'=>$create_voucher->id,
+                'client_name'=>$request->client_name,
+                'order_number_day'=>"",
+                'contributor'=>$contributor,
+                'context'=>"caja"
+            ])
+        ));
+    
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,"https://srv479098.hstgr.cloud/connectvpn.php");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    
+        $resultado= curl_exec($ch);
+        curl_close($ch);
         
         return response()->json([
             "status"=>200,
