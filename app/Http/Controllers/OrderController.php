@@ -34,7 +34,7 @@ class OrderController extends Controller
             })
             ->whereIn('status',['PENDIENTE','EN MESA'])
             ->orderBy('create_date','DESC')
-            ->paginate(10);
+            ->paginate(1000);
         
         foreach($orders as $order){
             $order->items=$order->find($order->id)->itemcart;
@@ -147,9 +147,13 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Order $id)
     {
-        //
+        $update=$id->update([
+            "status"=>"EN MESA"
+        ]);
+
+        return $update;
     }
 
     /**
