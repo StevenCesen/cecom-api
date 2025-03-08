@@ -129,7 +129,7 @@ class OrderController extends Controller
 
         foreach($id->details as $item){
             // $it=Item::where($item->item_id)->first();
-            $product=Product::where($item->item_id)->first();
+            $product=Product::where('id',$item->item_id)->first();
             $item->name=$product->name;
             $item->description=$product->description;
             $item->tax=$product->tax;
@@ -137,6 +137,9 @@ class OrderController extends Controller
         }
 
         $id->contributor=$id->find($id->id)->contributor;
+        $id->contributor->cert=($id->certificate!=null) ? base64_encode(file_get_contents('certs/'.$id->signature_path)) : "";
+        $id->establishment=$id->find($id->user_id)->establishment;
+
         return $id;
     }
 
