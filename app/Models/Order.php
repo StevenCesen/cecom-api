@@ -32,6 +32,10 @@ class Order extends Model
         return $this->hasOne(User::class);
     }
 
+    public function establisment(){
+        return $this->hasOne(Establishment::class);
+    }
+    
     public function itemcart(){
         return $this->hasMany(Itemcart::class);
     }
