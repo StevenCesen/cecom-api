@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contributor;
+use App\Models\Establishment;
 use App\Models\Item;
 use App\Models\Itemcart;
 use App\Models\Order;
@@ -138,7 +139,7 @@ class OrderController extends Controller
 
         $id->contributor=$id->find($id->id)->contributor;
         $id->contributor->cert=($id->contributor->certificate!=null) ? base64_encode(file_get_contents('certs/'.$id->contributor->signature_path)) : "";
-        $id->establishment=$id->find($id->user_id)->establishment;
+        $id->establishment=Establishment::where('user_id',$id->user_id)->first();
 
         return $id;
     }
