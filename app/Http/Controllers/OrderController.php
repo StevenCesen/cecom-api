@@ -32,7 +32,7 @@ class OrderController extends Controller
             ->when(request()->filled('user_id'),function($query){
                 $query->where('user_id','<=',request('user_id'));
             })
-            ->where('status','PENDIENTE')
+            ->whereIn('status',['PENDIENTE','EN MESA'])
             ->orderBy('create_date','DESC')
             ->paginate(10);
         
@@ -140,7 +140,7 @@ class OrderController extends Controller
         $id->contributor=$id->find($id->id)->contributor;
         $id->contributor->cert=($id->contributor->certificate!=null) ? base64_encode(file_get_contents('certs/'.$id->contributor->signature_path)) : "";
         $id->establishment=Establishment::where('contributor_id',$id->contributor_id)->first();
-        
+
         return $id;
     }
 
