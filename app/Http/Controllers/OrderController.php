@@ -137,7 +137,7 @@ class OrderController extends Controller
         }
 
         $id->contributor=$id->find($id->id)->contributor;
-        $id->contributor->cert=($id->certificate!=null) ? base64_encode(file_get_contents('certs/'.$id->signature_path)) : "";
+        $id->contributor->cert=($id->contributor->certificate!=null) ? base64_encode(file_get_contents('certs/'.$id->contributor->signature_path)) : "";
         $id->establishment=$id->find($id->user_id)->establishment;
 
         return $id;
