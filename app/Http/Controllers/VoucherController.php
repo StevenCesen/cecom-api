@@ -126,6 +126,8 @@ class VoucherController extends Controller
                     'item_id'=>$producto->id
                 ]);
 
+                //  SI EL CONTEXTO ES ORDER: OBTENGO EL ID DEL PRODUCTO PRINCIPAL
+
                 Product::where('id',$item->codigo)->update([
                     "quantity"=>intval($producto->quantity)-intval($item->cantidad)
                 ]);
@@ -148,6 +150,7 @@ class VoucherController extends Controller
             'access_key'=>$request->access_key,
             'sequential'=>$request->sequential,
             'direction'=>$contributor->direction,
+            'logo'=>$contributor->logo_path,
             'date'=>$request->create_date,
             'phone'=>$contributor->phone,
             'regimen'=>$contributor->regimen,
