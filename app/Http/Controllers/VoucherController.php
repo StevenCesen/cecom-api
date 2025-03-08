@@ -6,6 +6,7 @@ use App\Mail\SendMailable;
 use App\Models\Client;
 use App\Models\Contributor;
 use App\Models\Establishment;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
@@ -125,9 +126,7 @@ class VoucherController extends Controller
                     'complements'=>"",
                     'item_id'=>$producto->id
                 ]);
-
-                //  SI EL CONTEXTO ES ORDER: OBTENGO EL ID DEL PRODUCTO PRINCIPAL
-
+                
                 Product::where('id',$item->codigo)->update([
                     "quantity"=>intval($producto->quantity)-intval($item->cantidad)
                 ]);
@@ -187,6 +186,13 @@ class VoucherController extends Controller
 
         // Enviamos el correo electrónico
         Mail::to($request->client_email)->send(new SendMailable);
+
+        if($request->context==='ORDER'){
+            //  Damos de baja la comanda
+            Order::where('id',$request->order)->update([
+                "status"=>"FINALIZADO"
+            ]);
+        }
 
         //  Enviamos a imprimir
         $data = http_build_query(array(
