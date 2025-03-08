@@ -43,6 +43,33 @@ class OrderController extends Controller
         return $orders;
     }
 
+    public function indexMesero(Contributor $id)
+    {
+        $orders=$id->find($id->id)
+            ->order()
+            ->when(request()->filled('status'),function($query){
+                $query->where('status',request('status'));
+            })
+            ->when(request()->filled('client_name'),function($query){
+                $query->where('client_name',request('client_name'));
+            })
+            ->when(request()->filled('date'),function($query){
+                $query->where('create_date','<=',request('date'));
+            })
+            ->when(request()->filled('user_id'),function($query){
+                $query->where('user_id','<=',request('user_id'));
+            })
+            ->whereIn('status',['PENDIENTE'])
+            ->orderBy('create_date','DESC')
+            ->paginate(1000);
+        
+        foreach($orders as $order){
+            $order->items=$order->find($order->id)->itemcart;
+        }
+
+        return $orders;
+    }
+
     public function getNumOrderDay($contributor_id){
         $last_order=Order::where('contributor_id',$contributor_id)
             ->where('create_date','REGEXP',date('Y/m/d',time()-18000))
