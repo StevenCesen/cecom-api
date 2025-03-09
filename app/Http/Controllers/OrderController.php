@@ -208,7 +208,7 @@ class OrderController extends Controller
                 'create_date'=>date('Y/m/d H:i:s',time()-18000),
                 'items'=>json_decode($request->items),
                 'nro_order'=>$request->order_number_day,
-                'client_name'=>$request->client_name,
+                'client_name'=>$request->client_name." - COMANDA ACTUALIZADA",
                 'order_number_day'=>$request->order_number_day,
                 'user'=>User::where('id',$request->user_id)->first()->name,
                 'contributor'=>Contributor::where('id',$request->contributor_id)->first(),
