@@ -210,8 +210,8 @@ class OrderController extends Controller
                 'nro_order'=>$request->order_number_day,
                 'client_name'=>$request->client_name,
                 'order_number_day'=>$request->order_number_day,
-                'user'=>'',
-                'contributor'=>'',
+                'user'=>User::where('id',$request->user_id)->first()->name,
+                'contributor'=>Contributor::where('id',$request->contributor_id)->first(),
                 'context'=>"comanda"
             ])
         ));
