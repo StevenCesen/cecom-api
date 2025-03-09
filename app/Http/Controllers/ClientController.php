@@ -13,7 +13,12 @@ class ClientController extends Controller
      */
     public function index(Contributor $id)
     {
-        return $id->find($id->id)->client()->paginate(10);
+        return $id->find($id->id)
+            ->client()
+            ->when(request()->filled('identification'),function($query){
+                $query->where('identification',request('identification'));
+            })
+            ->paginate(10);
     }
 
     /**
