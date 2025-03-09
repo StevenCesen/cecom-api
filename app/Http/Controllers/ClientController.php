@@ -16,7 +16,7 @@ class ClientController extends Controller
         return $id->find($id->id)
             ->client()
             ->when(request()->filled('identification'),function($query){
-                $query->where('identification',request('identification'));
+                $query->where('identification','REGEXP',request('identification'));
             })
             ->paginate(10);
     }
