@@ -183,6 +183,29 @@ class OrderController extends Controller
         return $update;
     }
 
+    public function addItems(Request $request)
+    {   
+        //  Insertamos los productos de la orden
+        $items=json_decode($request->items);
+
+        foreach($items as $item){
+            $data_item=[
+                'name'=>$item->name,
+                'notes'=>$item->notes,
+                'quantity'=>$item->quantity,
+                'complements'=>"",
+                'item_id'=>$item->id,
+                'order_id'=>$request->order_id
+            ];
+            Itemcart::create($data_item);
+        }
+        
+        return response()->json([
+            "status"=>200,
+            "message"=>"Comanda actualizada."
+        ],200);
+    }
+
     /**
      * Remove the specified resource from storage.
      */

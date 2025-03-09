@@ -88,6 +88,7 @@ Route::post('/sendInvoice',[MailController::class,'sendMail']);
 Route::get('/contributors/{id}/ordersmesero',[OrderController::class,'indexMesero']);
 Route::get('/contributors/{id}/orders',[OrderController::class,'index']);
 Route::get('/orders/{id}',[OrderController::class,'show']);
+Route::post('/orders/additems',[OrderController::class,'addItems']);
 Route::post('/orders',[OrderController::class,'store']);
 Route::put('/orders/{id}',[OrderController::class,'update']);
 Route::delete('/orders/{id}',[OrderController::class,'destroy']);
