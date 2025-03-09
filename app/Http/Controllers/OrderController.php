@@ -199,7 +199,32 @@ class OrderController extends Controller
             ];
             Itemcart::create($data_item);
         }
-        
+
+        //  Enviamos a imprimir
+        $data = http_build_query(array(
+            'data'=>json_encode([
+                'floor'=>$request->client_piso,
+                'table'=>$request->client_mesa,
+                'create_date'=>date('Y/m/d H:i:s',time()-18000),
+                'items'=>json_decode($request->items),
+                'nro_order'=>$request->order_number_day,
+                'client_name'=>$request->client_name,
+                'order_number_day'=>$request->order_number_day,
+                'user'=>'',
+                'contributor'=>'',
+                'context'=>"comanda"
+            ])
+        ));
+    
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,"https://srv479098.hstgr.cloud/connectvpn.php");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    
+        $resultado= curl_exec($ch);
+        curl_close($ch);
+
         return response()->json([
             "status"=>200,
             "message"=>"Comanda actualizada."
