@@ -214,8 +214,12 @@ class VoucherController extends Controller
                 [
                     'field'=>'Telf',
                     'value'=>$request->client_phone
+                ],
+                [
+                    'field'=>'Nota',
+                    'value'=>$request->nota
                 ]
-                ]),
+            ]),
             'barcode'=>$barcode
         ]);
         
