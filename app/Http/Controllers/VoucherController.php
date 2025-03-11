@@ -72,7 +72,9 @@ class VoucherController extends Controller
             'contributor_id'=>$request->contributor_id,
             'client_id'=>"",
             'detail'=>$request->detail,
-            'pay_ways'=>$request->info_pay
+            'pay_ways'=>json_encode(
+                json_decode($request->info_pay)->pay_way
+            )
         ];
 
         $client=Client::where('identification',$request->client_identification)->first();
@@ -165,7 +167,7 @@ class VoucherController extends Controller
         
         $new_pay_ways=[];
 
-        foreach(json_decode($request->info_pay) as $pay){
+        foreach(json_decode($request->info_pay)->pay_way as $pay){
             array_push($new_pay_ways,[
                 'way'=>$this->getPayWay($pay->pay_way),
                 'value'=>$pay->value,
