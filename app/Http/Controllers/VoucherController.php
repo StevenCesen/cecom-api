@@ -32,6 +32,26 @@ class VoucherController extends Controller
         return $vouchers;
     }
 
+    public function getPayWay($value){
+        if($value=='01'){
+            return "EFECTIVO - SIN UTILIZACIÓN DEL SISTEMA FINANCIERO";
+        }else if($value=='15'){
+            return "COMPENSACIÓN DE DEUDAS";
+        }else if($value=='16'){
+            return "TARJETA DE DÉBITO";
+        }else if($value=='17'){
+            return "DINERO ELECTRÓNICO";
+        }else if($value=='18'){
+            return "TARJETA PREPAGO";
+        }else if($value=='19'){
+            return "TARJETA DE CRÉDITO";
+        }else if($value=='20'){
+            return "OTROS CON UTILIZACIÓN DEL SISTEMA FINANCIERO";
+        }else if($value=='21'){
+            return "ENDOSO DE TÍTULOS";
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -50,7 +70,9 @@ class VoucherController extends Controller
             'xml_path'=>$request->xml_path,
             'status'=>$request->status,
             'contributor_id'=>$request->contributor_id,
-            'client_id'=>""
+            'client_id'=>"",
+            'detail'=>$request->detail,
+            'pay_ways'=>$request->info_pay
         ];
 
         $client=Client::where('identification',$request->client_identification)->first();
@@ -141,6 +163,17 @@ class VoucherController extends Controller
         $generator = new \Picqer\Barcode\BarcodeGeneratorHTML();
         $barcode = $generator->getBarcode($request->access_key, $generator::TYPE_CODE_128,1.75);
         
+        $new_pay_ways=[];
+
+        foreach(json_decode($request->info_pay) as $pay){
+            array_push($new_pay_ways,[
+                'way'=>$this->getPayWay($pay->pay_way),
+                'value'=>$pay->value,
+                'amount'=>($pay->pay_way!="01" & $pay->pay_way!="16") ? 30 : "",
+                'way_time'=>($pay->pay_way!="01" & $pay->pay_way!="16") ? 'DIAS' : ""
+            ]);
+        }
+
         $invoice=Pdf::loadView('ride',[
             'items'=>$request->detail,
             'commercial_name'=>$contributor->commercial_name,
@@ -166,14 +199,15 @@ class VoucherController extends Controller
             'dscto'=>0,
             'total'=>$request->total_amount,
             'propina'=>0,
-            'pay_ways'=>json_encode([
-                [
-                    'way'=>'SIN UTILIZACION DEL SISTEMA FINANCIERO',
-                    'value'=>$request->total_amount,
-                    'amount'=>30,
-                    'way_time'=>'DIAS'
-                ]
-            ]),
+            // 'pay_ways'=>json_encode([
+            //     [
+            //         'way'=>'SIN UTILIZACION DEL SISTEMA FINANCIERO',
+            //         'value'=>$request->total_amount,
+            //         'amount'=>30,
+            //         'way_time'=>'DIAS'
+            //     ]
+            // ]),
+            'pay_ways'=>json_encode($new_pay_ways),
             'adicional'=>json_encode([
                 [
                     'field'=>'Telf',
