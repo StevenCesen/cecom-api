@@ -25,7 +25,9 @@ class Voucher extends Model
         'status',
         'contributor_id',
         'client_id',
-        'order_id'
+        'order_id',
+        'pay_ways',
+        'detail'
     ];
 
     /**

@@ -15,7 +15,8 @@ class Itemcart extends Model
         'quantity',
         'complements',
         'item_id',
-        'order_id'
+        'order_id',
+        'status_pay'
     ];
 
     public function order(){

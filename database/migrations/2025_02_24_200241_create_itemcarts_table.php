@@ -17,6 +17,10 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->integer('quantity');
             $table->text('complements')->nullable();
+            
+            //  CAMPOS NUEVOS
+            $table->string('status_pay')->nullable();
+
             $table->foreignId('item_id');
             $table->foreign('item_id')
                 ->references('id')

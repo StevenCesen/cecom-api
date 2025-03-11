@@ -25,6 +25,13 @@ return new class extends Migration
             $table->string('ride_path')->nullable();
             $table->string('xml_path')->nullable();
             $table->string('status');
+
+            //  CAMPOS NUEVOS
+            $table->text('detail')->nullable();
+            //$table->integer('bank_id');
+            $table->string('pay_ways')->nullable();
+            //$table->string('type_pays');
+
             $table->foreignId('contributor_id');
             $table->foreign('contributor_id')
                 ->references('id')
