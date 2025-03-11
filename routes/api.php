@@ -74,6 +74,7 @@ Route::delete('/clients/{id}',[ClientController::class,'destroy']);
 
 // ========================= EndPoints para COMPROBANTES ===============================
 Route::get('/contributors/{id}/vouchers',[VoucherController::class,'index']);
+Route::get('/contributors/{id}/reports',[VoucherController::class,'report']);
 Route::get('/vouchers/mod11',[VoucherController::class,'getMod11Dv']);
 Route::get('/vouchers/{id}',[VoucherController::class,'show']);
 Route::post('/vouchers',[VoucherController::class,'store']);
