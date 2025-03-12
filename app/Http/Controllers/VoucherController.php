@@ -322,7 +322,7 @@ class VoucherController extends Controller
 
     public function report(Request $request,Contributor $id){
         $vouchers=$id->voucher()
-            ->whereBetween('created_at',[$request->date_init,$request->date_end])
+            ->whereBetween('create_date',[$request->date_init,$request->date_end])
             ->get();
 
         $EFECTIVO=[];
@@ -362,7 +362,7 @@ class VoucherController extends Controller
 
                     $t_ahorita+=floatval($pay->value);
 
-                }else if($pay->type_pay=="DE_UNA"){
+                }else if($pay->type_pay=="DE UNA"){
 
                     array_push($DE_UNA,[
                         "payment_id"=>$voucher->sequential,
@@ -373,7 +373,7 @@ class VoucherController extends Controller
 
                     $t_una+=floatval($pay->value);
 
-                }else if($pay->type_pay=="TARJETA_CREDITO"){
+                }else if($pay->type_pay=="TARJETA CREDITO"){
                     
                     array_push($TARJETA_CREDITO,[
                         "payment_id"=>$voucher->sequential,
@@ -384,7 +384,7 @@ class VoucherController extends Controller
 
                     $t_tcredito+=floatval($pay->value);
 
-                }else if($pay->type_pay=="TARJETA_DEBITO"){
+                }else if($pay->type_pay=="TARJETA DEBITO"){
 
                     array_push($TARJETA_DEBITO,[
                         "payment_id"=>$voucher->sequential,
@@ -398,7 +398,7 @@ class VoucherController extends Controller
                 }
             }
         }
-
+        
         return [
             "data"=>[
                 [
