@@ -70,9 +70,9 @@ class ContributorController extends Controller
         $yesterday=$yesterday[0].'-'.$yesterday[1].'-'.(($yesterday[2]-1<10) ? '0'.$yesterday[2]-1 : $yesterday[2]-1);
         $month=date('Y-m',time()-18000);
 
-        $id->total_now=$id->find($id->id)->voucher()->where('create_date','REGEXP',$now)->sum('total_amount');
-        $id->total_yesterday=$id->find($id->id)->voucher()->where('create_date','REGEXP',$yesterday)->sum('total_amount');
-        $id->total_month=$id->find($id->id)->voucher()->where('create_date','REGEXP',$month)->sum('total_amount');;
+        $id->total_now=round($id->find($id->id)->voucher()->where('create_date','REGEXP',$now)->sum('total_amount'),2);
+        $id->total_yesterday=round($id->find($id->id)->voucher()->where('create_date','REGEXP',$yesterday)->sum('total_amount'),2);
+        $id->total_month=round($id->find($id->id)->voucher()->where('create_date','REGEXP',$month)->sum('total_amount'),2);
         $id->products=$id->find($id->id)->product()->count();
         $id->clients=$id->find($id->id)->client()->count();
         $id->vouchers=$id->find($id->id)->voucher()->count();
