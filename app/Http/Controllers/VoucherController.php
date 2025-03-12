@@ -146,7 +146,7 @@ class VoucherController extends Controller
                 array_push($items,[
                     'name'=>$producto->name,
                     'notes'=>$producto->notes,
-                    'price'=>$producto->price,
+                    'price'=>$item->precio_unitario,
                     'quantity'=>$item->cantidad,
                     'complements'=>"",
                     'item_id'=>$producto->id
