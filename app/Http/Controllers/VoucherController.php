@@ -322,7 +322,7 @@ class VoucherController extends Controller
 
     public function report(Request $request,Contributor $id){
         $vouchers=$id->voucher()
-            ->whereBetween('create_date',[$request->date_init,$request->date_end])
+            ->whereBetween('created_at',[$request->date_init,$request->date_end])
             ->get();
 
         $EFECTIVO=[];
@@ -398,7 +398,7 @@ class VoucherController extends Controller
                 }
             }
         }
-        
+
         return [
             "data"=>[
                 [
