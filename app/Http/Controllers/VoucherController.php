@@ -343,6 +343,7 @@ class VoucherController extends Controller
             foreach($pay_way as $pay){
                 if($pay->type_pay=="EFECTIVO"){
                     array_push($EFECTIVO,[
+                        "payment_date"=>$voucher->create_date,
                         "payment_id"=>$voucher->sequential,
                         "payment_value"=>$pay->value,
                         "client_name"=>$cliente->name,
@@ -354,6 +355,7 @@ class VoucherController extends Controller
                 }else if($pay->type_pay=="AHORITA"){
 
                     array_push($AHORITA,[
+                        "payment_date"=>$voucher->create_date,
                         "payment_id"=>$voucher->sequential,
                         "payment_value"=>$pay->value,
                         "client_name"=>$cliente->name,
@@ -365,6 +367,7 @@ class VoucherController extends Controller
                 }else if($pay->type_pay=="DE UNA"){
 
                     array_push($DE_UNA,[
+                        "payment_date"=>$voucher->create_date,
                         "payment_id"=>$voucher->sequential,
                         "payment_value"=>$pay->value,
                         "client_name"=>$cliente->name,
@@ -376,6 +379,7 @@ class VoucherController extends Controller
                 }else if($pay->type_pay=="TARJETA CREDITO"){
                     
                     array_push($TARJETA_CREDITO,[
+                        "payment_date"=>$voucher->create_date,
                         "payment_id"=>$voucher->sequential,
                         "payment_value"=>$pay->value,
                         "client_name"=>$cliente->name,
@@ -387,6 +391,7 @@ class VoucherController extends Controller
                 }else if($pay->type_pay=="TARJETA DEBITO"){
 
                     array_push($TARJETA_DEBITO,[
+                        "payment_date"=>$voucher->create_date,
                         "payment_id"=>$voucher->sequential,
                         "payment_value"=>$pay->value,
                         "client_name"=>$cliente->name,
