@@ -21,7 +21,7 @@ class ProductController extends Controller
                     ->when(request()->filled('type'),function($query){
                         $query->where('type_id',intval(request('type')));
                     })
-                    ->paginate(10);
+                    ->paginate(1000);
     }
 
     /**
