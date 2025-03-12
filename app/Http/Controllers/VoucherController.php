@@ -345,7 +345,7 @@ class VoucherController extends Controller
                     array_push($EFECTIVO,[
                         "payment_date"=>$voucher->create_date,
                         "payment_id"=>$voucher->sequential,
-                        "payment_value"=>$pay->value,
+                        "payment_value"=>round($pay->value,2),
                         "client_name"=>$cliente->name,
                         "client_ci"=>$cliente->identification
                     ]);
@@ -357,7 +357,7 @@ class VoucherController extends Controller
                     array_push($AHORITA,[
                         "payment_date"=>$voucher->create_date,
                         "payment_id"=>$voucher->sequential,
-                        "payment_value"=>$pay->value,
+                        "payment_value"=>round($pay->value,2),
                         "client_name"=>$cliente->name,
                         "client_ci"=>$cliente->identification
                     ]);
@@ -369,7 +369,7 @@ class VoucherController extends Controller
                     array_push($DE_UNA,[
                         "payment_date"=>$voucher->create_date,
                         "payment_id"=>$voucher->sequential,
-                        "payment_value"=>$pay->value,
+                        "payment_value"=>round($pay->value,2),
                         "client_name"=>$cliente->name,
                         "client_ci"=>$cliente->identification
                     ]);
@@ -381,7 +381,7 @@ class VoucherController extends Controller
                     array_push($TARJETA_CREDITO,[
                         "payment_date"=>$voucher->create_date,
                         "payment_id"=>$voucher->sequential,
-                        "payment_value"=>$pay->value,
+                        "payment_value"=>round($pay->value,2),
                         "client_name"=>$cliente->name,
                         "client_ci"=>$cliente->identification
                     ]);
@@ -393,7 +393,7 @@ class VoucherController extends Controller
                     array_push($TARJETA_DEBITO,[
                         "payment_date"=>$voucher->create_date,
                         "payment_id"=>$voucher->sequential,
-                        "payment_value"=>$pay->value,
+                        "payment_value"=>round($pay->value,2),
                         "client_name"=>$cliente->name,
                         "client_ci"=>$cliente->identification
                     ]);
@@ -409,12 +409,12 @@ class VoucherController extends Controller
                 [
                     "type"=>"EFECTIVO",
                     "items"=>$EFECTIVO,
-                    "total"=>$t_efectivo
+                    "total"=>round($t_efectivo,2)
                 ],
                 [
                     "type"=>"AHORITA",
                     "items"=>$AHORITA,
-                    "total"=>$t_ahorita
+                    "total"=>round($t_ahorita,2)
                 ],
                 [
                     "type"=>"DE UNA",
@@ -424,12 +424,12 @@ class VoucherController extends Controller
                 [
                     "type"=>"TARJETA CRÉDITO",
                     "items"=>$TARJETA_CREDITO,
-                    "total"=>$t_tcredito
+                    "total"=>round($t_tcredito,2)
                 ],
                 [
                     "type"=>"TARJETA DÉBITO",
                     "items"=>$TARJETA_DEBITO,
-                    "total"=>$t_tdebito
+                    "total"=>round($t_tdebito,2)
                 ]
             ]
         ];
