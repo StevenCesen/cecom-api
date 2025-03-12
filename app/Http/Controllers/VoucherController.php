@@ -325,7 +325,109 @@ class VoucherController extends Controller
             ->whereBetween('create_date',[$request->date_init,$request->date_end])
             ->get();
 
-        return $vouchers;
+        $EFECTIVO=[];
+        $t_efectivo=0;
+        $AHORITA=[];
+        $t_ahorita=0;
+        $DE_UNA=[];
+        $t_una=0;
+        $TARJETA_CREDITO=[];
+        $t_tcredito=0;
+        $TARJETA_DEBITO=[];
+        $t_tdebito=0;
+
+        foreach($vouchers as $voucher){
+            $pay_way=json_decode($voucher->pay_ways);
+            $cliente=Client::where('id',$voucher->client_id)->first();
+
+            foreach($pay_way as $pay){
+                if($pay->type_pay=="EFECTIVO"){
+                    array_push($EFECTIVO,[
+                        "payment_id"=>$voucher->sequential,
+                        "payment_value"=>$pay->value,
+                        "client_name"=>$cliente->name,
+                        "client_ci"=>$cliente->identification
+                    ]);
+
+                    $t_efectivo+=floatval($pay->value);
+
+                }else if($pay->type_pay=="AHORITA"){
+
+                    array_push($AHORITA,[
+                        "payment_id"=>$voucher->sequential,
+                        "payment_value"=>$pay->value,
+                        "client_name"=>$cliente->name,
+                        "client_ci"=>$cliente->identification
+                    ]);
+
+                    $t_ahorita+=floatval($pay->value);
+
+                }else if($pay->type_pay=="DE_UNA"){
+
+                    array_push($DE_UNA,[
+                        "payment_id"=>$voucher->sequential,
+                        "payment_value"=>$pay->value,
+                        "client_name"=>$cliente->name,
+                        "client_ci"=>$cliente->identification
+                    ]);
+
+                    $t_una+=floatval($pay->value);
+
+                }else if($pay->type_pay=="TARJETA_CREDITO"){
+                    
+                    array_push($TARJETA_CREDITO,[
+                        "payment_id"=>$voucher->sequential,
+                        "payment_value"=>$pay->value,
+                        "client_name"=>$cliente->name,
+                        "client_ci"=>$cliente->identification
+                    ]);
+
+                    $t_tcredito+=floatval($pay->value);
+
+                }else if($pay->type_pay=="TARJETA_DEBITO"){
+
+                    array_push($TARJETA_DEBITO,[
+                        "payment_id"=>$voucher->sequential,
+                        "payment_value"=>$pay->value,
+                        "client_name"=>$cliente->name,
+                        "client_ci"=>$cliente->identification
+                    ]);
+
+                    $t_tdebito+=floatval($pay->value);
+
+                }
+            }
+        }
+        
+        return [
+            "data"=>[
+                [
+                    "type"=>"EFECTIVO",
+                    "items"=>$EFECTIVO,
+                    "total"=>$t_efectivo
+                ],
+                [
+                    "type"=>"AHORITA",
+                    "items"=>$AHORITA,
+                    "total"=>$t_ahorita
+                ],
+                [
+                    "type"=>"DE UNA",
+                    "items"=>$DE_UNA,
+                    "total"=>$t_una
+                ],
+                [
+                    "type"=>"TARJETA CRÉDITO",
+                    "items"=>$TARJETA_CREDITO,
+                    "total"=>$t_tcredito
+                ],
+                [
+                    "type"=>"TARJETA DÉBITO",
+                    "items"=>$TARJETA_DEBITO,
+                    "total"=>$t_tdebito
+                ]
+            ]
+        ];
     }
 
     /**
