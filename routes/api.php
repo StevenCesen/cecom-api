@@ -96,7 +96,7 @@ Route::put('/orders/{id}',[OrderController::class,'update']);
 Route::delete('/orders/{id}',[OrderController::class,'destroy']);
 
 // ========================= EndPoints para ITEMS CART ===============================
-Route::post('/itemscart',[Itemcart::class,'store']);
+Route::post('/itemcarts',[Itemcart::class,'store']);
 
 Route::get('/printest',function(){
     $data=json_encode([
