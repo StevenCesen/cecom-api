@@ -22,7 +22,7 @@ class ItemcartController extends Controller
     public function store(Request $request)
     {
         $create_itemcart=Itemcart::create($request->all());
-        $producto=Product::where('id',$request->id)->first();
+        $producto=Product::where('id',$request->item_id)->first();
         $producto->quantity=$request->quantity;
         $producto->item_id=$create_itemcart->id;
 
