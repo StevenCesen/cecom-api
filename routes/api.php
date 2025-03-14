@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
+use App\Models\Itemcart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -93,6 +94,9 @@ Route::post('/orders/additems',[OrderController::class,'addItems']);
 Route::post('/orders',[OrderController::class,'store']);
 Route::put('/orders/{id}',[OrderController::class,'update']);
 Route::delete('/orders/{id}',[OrderController::class,'destroy']);
+
+// ========================= EndPoints para ITEMS CART ===============================
+Route::post('/itemscart',[Itemcart::class,'store']);
 
 Route::get('/printest',function(){
     $data=json_encode([

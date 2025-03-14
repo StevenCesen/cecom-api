@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Itemcart;
 use Illuminate\Http\Request;
 
 class ItemcartController extends Controller
@@ -19,7 +20,12 @@ class ItemcartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $create_itemcart=Itemcart::create($request->all());
+
+        return response()->json([
+            "status"=>200,
+            "message"=>"Item agregado correctamente."
+        ],200);
     }
 
     /**
