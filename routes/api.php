@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContributorController;
 use App\Http\Controllers\EstablishmentController;
+use App\Http\Controllers\ItemcartController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
@@ -13,7 +14,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
-use App\Models\Itemcart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -96,7 +96,7 @@ Route::put('/orders/{id}',[OrderController::class,'update']);
 Route::delete('/orders/{id}',[OrderController::class,'destroy']);
 
 // ========================= EndPoints para ITEMS CART ===============================
-Route::post('/itemcarts',[Itemcart::class,'store']);
+Route::post('/itemcarts',[ItemcartController::class,'store']);
 
 Route::get('/printest',function(){
     $data=json_encode([

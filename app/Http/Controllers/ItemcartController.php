@@ -21,27 +21,16 @@ class ItemcartController extends Controller
      */
     public function store(Request $request)
     {
-
-        try {
-            $create_itemcart=Itemcart::create($request->all());
+        $create_itemcart=Itemcart::create($request->all());
         $producto=Product::where('id',$request->item_id)->first();
         $producto->quantity=$request->quantity;
         $producto->item_id=$create_itemcart->id;
+
         return response()->json([
             "status"=>200,
             "message"=>"Item agregado correctamente.",
             "data"=>$producto
         ],200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                "status"=>500,
-                "message"=>"Item agregado correctamente.",
-                "data"=>$th
-            ],500);
-        }
-        
-
-        
     }
 
     /**
