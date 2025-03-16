@@ -52,8 +52,14 @@ class ItemcartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Itemcart $id)
     {
-        //
+        $delete=$id->delete();
+
+        return response()->json([
+            "status"=>200,
+            "message"=>$delete
+        ],200);
+
     }
 }
