@@ -57,7 +57,7 @@ class OrderController extends Controller
                 $query->where('create_date','<=',request('date'));
             })
             ->when(request()->filled('user_id'),function($query){
-                $query->where('user_id','<=',request('user_id'));
+                $query->where('user_id','=',request('user_id'));
             })
             ->whereIn('status',['PENDIENTE'])
             ->orderBy('create_date','DESC')
