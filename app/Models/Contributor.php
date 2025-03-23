@@ -72,6 +72,10 @@ class Contributor extends Model
     public function menus(){
         return $this->hasMany(Menu::class)->chaperone();
     }
+    
+    public function ticket(){
+        return $this->hasMany(Ticket::class)->chaperone();
+    }
 
     public function largestUser(){
         return $this->user()->one()->ofMany('id', 'max');

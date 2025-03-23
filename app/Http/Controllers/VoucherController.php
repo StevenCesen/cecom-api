@@ -224,11 +224,11 @@ class VoucherController extends Controller
             'barcode'=>$barcode
         ]);
         
-        //file_put_contents('ride_clients/'.$contributor->identification.'/'.$request->access_key.'.pdf', $invoice->output());
+        file_put_contents('ride_clients/'.$contributor->identification.'/'.$request->access_key.'.pdf', $invoice->output());
 
         // Enviamos el correo electrónico
-        //Mail::to($request->client_email)->send(new SendMailable);
-
+        Mail::to($request->client_email)->send(new SendMailable);
+        
         if($request->context==='ORDER'){
             //  Damos de baja los items de la comanda
             $itemcarts_new=[];

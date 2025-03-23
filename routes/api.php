@@ -11,6 +11,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
@@ -124,3 +125,10 @@ Route::get('/printest',function(){
 
     return $resultado;
 });
+
+// ========================= EndPoints para TICKETS ===============================
+Route::get('/contributors/{id}/tickets',[TicketController::class,'indexMesero']);
+Route::get('/tickets/{id}',[TicketController::class,'show']);
+Route::post('/tickets',[TicketController::class,'store']);
+Route::put('/tickets/{id}',[TicketController::class,'update']);
+Route::delete('/tickets/{id}',[TicketController::class,'destroy']);

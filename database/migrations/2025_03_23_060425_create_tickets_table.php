@@ -33,6 +33,11 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->onUpdate('cascade');
+            $table->foreignId('contributor_id');
+            $table->foreign('contributor_id')
+                ->references('id')
+                ->on('contributors')
+                ->onUpdate('cascade');
         });
     }
 

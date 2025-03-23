@@ -20,6 +20,11 @@ class Ticket extends Model
         'ride_path',
         'xml_path',
         'client_id',
-        'user_id'
+        'user_id',
+        'contributor_id'
     ];
+
+    public function contributor(){
+        return $this->belongsTo(Contributor::class);
+    }
 }
