@@ -6,6 +6,7 @@ use App\Mail\SendMailable;
 use App\Models\Client;
 use App\Models\Contributor;
 use App\Models\Establishment;
+use App\Models\Itemcart;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Voucher;
@@ -223,16 +224,50 @@ class VoucherController extends Controller
             'barcode'=>$barcode
         ]);
         
-        file_put_contents('ride_clients/'.$contributor->identification.'/'.$request->access_key.'.pdf', $invoice->output());
+        //file_put_contents('ride_clients/'.$contributor->identification.'/'.$request->access_key.'.pdf', $invoice->output());
 
         // Enviamos el correo electrónico
-        Mail::to($request->client_email)->send(new SendMailable);
+        //Mail::to($request->client_email)->send(new SendMailable);
 
         if($request->context==='ORDER'){
-            //  Damos de baja la comanda
-            Order::where('id',$request->order)->update([
-                "status"=>"FINALIZADO"
-            ]);
+            //  Damos de baja los items de la comanda
+            $itemcarts_new=[];
+            $detalle=json_decode($request->detail);
+
+            foreach($detalle as $item){
+
+                $itemcart=Itemcart::where('id',$item->itemcart_id)->first();
+                $new_size=intval($itemcart->quantity)-intval($item->cantidad);
+
+                if($new_size>0){
+                    Itemcart::where('id',$item->itemcart_id)->update([
+                        'quantity'=>$new_size
+                    ]);
+
+                    array_push($itemcarts_new,[
+                        'name'=>$producto->name,
+                        'notes'=>$producto->notes,
+                        'price'=>$item->precio_unitario,
+                        'quantity'=>$new_size,
+                        'complements'=>"",
+                        'item_id'=>$producto->id
+                    ]);
+                    
+                }else{
+                    Itemcart::where('id',$item->itemcart_id)->update([
+                        'status_pay'=>'FACTURADO'
+                    ]);
+                }
+
+            }
+
+            $exits_products=Order::where('id',operator: $request->order)->find($request->order)->itemcart()->whereNull('status_pay')->count();
+
+            if($exits_products==0){
+                Order::where('id',$request->order)->update([
+                    "status"=>"FINALIZADO"
+                ]);
+            }
         }
 
         //  Enviamos a imprimir

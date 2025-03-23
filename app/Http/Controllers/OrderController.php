@@ -147,13 +147,13 @@ class OrderController extends Controller
             "resultado"=>$resultado
         ],200);
     }
-
+    
     /**
      * Display the specified resource.
      */
     public function show(Order $id)
     {   
-        $id->details=$id->find($id->id)->itemcart;
+        $id->details=$id->find($id->id)->itemcart()->whereNull('status_pay')->get();
 
         foreach($id->details as $item){
             // $it=Item::where($item->item_id)->first();
