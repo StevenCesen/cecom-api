@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TicketComplement extends Model
+class TicketPay extends Model
 {
-    /** @use HasFactory<\Database\Factories\TicketComplementFactory> */
+    /** @use HasFactory<\Database\Factories\TicketPayFactory> */
     use HasFactory;
+
     protected $fillable=[
         'date_create',
-        'quantity',
-        'media',
-        'ticket_id',
-        'text'
+        'pay_value',
+        'pay_way',
+        'pay_type',
+        'ticket_id'
     ];
 }

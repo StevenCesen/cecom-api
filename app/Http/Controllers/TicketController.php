@@ -8,10 +8,11 @@ use App\Models\Ticket;
 use App\Models\TicketComplement;
 use App\Models\TicketCost;
 use App\Models\TicketInteraction;
+use App\Models\TicketPay;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
-{
+{   
     /**
      * Display a listing of the resource.
      */
@@ -43,7 +44,6 @@ class TicketController extends Controller
         $client=Client::where('identification',$request->client_identification)->first();
         
         if($client==null){
-
             $client=Client::create([
                 'identification'=>$request->client_identification,
                 'name'=>$request->client_name,
@@ -52,14 +52,13 @@ class TicketController extends Controller
                 'email'=>$request->client_email,
                 'contributor_id'=>$request->contributor_id
             ]);
-
         }
 
         $data=[
-            'title'=>$request->title,
+            'title'=>$request->name,
             'date_create'=>date('Y/m/d H:i:s',time()-18000),
             'date_finish'=>$request->date_finish,
-            'last_interaction'=>$request->interaction_text,
+            'last_interaction'=>$request->description,
             'status'=>'EN PROCESO',
             'client_id'=>$client->id,
             'user_id'=>$request->user_id,
@@ -71,8 +70,8 @@ class TicketController extends Controller
         //  Creamos la interacción con el ticket
         $create_interaction=TicketInteraction::create([
             'date_create'=>date('Y/m/d H:i:s',time()-18000),
-            'detail'=>$request->interaction_text,
-            'media'=>$request->interaction_media,
+            'detail'=>$request->description,
+            'media'=>"",
             'ticket_id'=>$create_ticket->id
         ]);
 
@@ -83,6 +82,8 @@ class TicketController extends Controller
             foreach($complements as $complement){
                 $create_complement=TicketComplement::create([
                     'date_create'=>date('Y/m/d H:i:s',time()-18000),
+                    'text'=>$complement->text,
+                    'quantity'=>$complement->quantity,
                     'media'=>json_encode($complement->media),
                     'ticket_id'=>$create_ticket->id
                 ]);
@@ -90,14 +91,25 @@ class TicketController extends Controller
         }
 
         //  Creamos los costos del ticket: Mano de obra,...
-        $costs=json_decode($request->costs);
+        $costs=json_decode($request->products);
 
         foreach($costs as $cost){
             $create_cost=TicketCost::create([
                 'date_create'=>date('Y/m/d H:i:s',time()-18000),
                 'quantity'=>$cost->quantity,
-                'product_id'=>$cost->product_id,
+                'product_id'=>$cost->id,
                 'ticket_id'=>$create_ticket->id,
+            ]);
+        }
+
+        //  Si hay abono lo guardo
+        if(floatval($request->value_pay)>0){
+            $create_pay=TicketPay::create([
+                'date_create'=>date('Y/m/d H:i:s',time()-18000),
+                'pay_value'=>$request->value_pay,
+                'pay_way'=>$request->pay_way,
+                'pay_type'=>$request->pay_type,
+                'ticket_id'=>$create_ticket->id
             ]);
         }
 

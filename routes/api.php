@@ -127,7 +127,7 @@ Route::get('/printest',function(){
 });
 
 // ========================= EndPoints para TICKETS ===============================
-Route::get('/contributors/{id}/tickets',[TicketController::class,'indexMesero']);
+Route::get('/contributors/{id}/tickets',[TicketController::class,'index']);
 Route::get('/tickets/{id}',[TicketController::class,'show']);
 Route::post('/tickets',[TicketController::class,'store']);
 Route::put('/tickets/{id}',[TicketController::class,'update']);
