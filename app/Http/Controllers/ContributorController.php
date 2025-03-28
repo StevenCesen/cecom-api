@@ -82,6 +82,8 @@ class ContributorController extends Controller
     }
 
     public function showProductsStadistics(){
+        DB::statement("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'");
+        
         $fecha = date('Y/m',time()-18000);
         $results = DB::table('orders as o')
             ->join('itemcarts as i', 'i.order_id', '=', 'o.id')
