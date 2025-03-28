@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contributor;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class ContributorController extends Controller
@@ -78,6 +79,21 @@ class ContributorController extends Controller
         $id->vouchers=$id->find($id->id)->voucher()->count();
 
         return $id;
+    }
+
+    public function showProductsStadistics(){
+        $fecha = date('Y/m',time()-18000);
+        $results = DB::table('orders as o')
+            ->join('itemcarts as i', 'i.order_id', '=', 'o.id')
+            ->join('products as p', 'p.id', '=', 'i.item_id')
+            ->select(DB::raw('p.name as Producto'), DB::raw('COUNT(i.item_id) as Cantidad'))
+            ->where('o.contributor_id', 6)
+            ->whereRaw('o.create_date REGEXP ?', [$fecha]) // Usamos el parámetro en lugar de la cadena directa
+            ->groupBy('i.item_id')
+            ->orderByRaw('COUNT(i.item_id) DESC')
+            ->get();
+
+        return $results;
     }
 
     public function bchexdec($hex){

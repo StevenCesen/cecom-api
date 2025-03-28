@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Contributor;
+use App\Models\Product;
 use App\Models\Ticket;
 use App\Models\TicketComplement;
 use App\Models\TicketCost;
@@ -32,6 +33,7 @@ class TicketController extends Controller
             ->when(request()->filled('client_id'),function($query){
                 $query->where('client_id',intval(request('client_id')));
             })
+            ->orderBy('id','DESC')
             ->paginate(10);
     }
 
@@ -125,6 +127,18 @@ class TicketController extends Controller
      */
     public function show(Ticket $id)
     {
+        $id->complements=$id->find($id->id)->complements;
+        $id->interactions=$id->find($id->id)->interactions()->orderBy('id','DESC')->get();
+        $id->costs=$id->find($id->id)->costs;
+        $id->orders=$id->find($id->id)->orders;
+        $id->pays=$id->find($id->id)->pays;
+
+        foreach($id->costs as $product){
+            $item=Product::where('id',$product->product_id)->first();
+            $product->name=$item->name;
+            $product->price=$item->price;
+        }
+
         return response()->json([
             "status"=>200,
             "data"=>$id

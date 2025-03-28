@@ -27,4 +27,24 @@ class Ticket extends Model
     public function contributor(){
         return $this->belongsTo(Contributor::class);
     }
+
+    public function complements(){
+        return $this->hasMany(TicketComplement::class);
+    }
+    public function costs(){
+        return $this->hasMany(TicketCost::class);
+    }
+
+    public function interactions(){
+        return $this->hasMany(TicketInteraction::class);
+    }
+
+    public function orders(){
+        return $this->hasMany(TicketOrder::class);
+    }
+    
+    public function pays(){
+        return $this->hasMany(TicketPay::class);
+    }
+
 }

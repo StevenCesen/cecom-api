@@ -12,6 +12,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\TicketCostController;
+use App\Http\Controllers\TicketInteractionController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
@@ -21,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 // ========================= EndPoints para CONTRIBUYENTES ===============================
 Route::get('/contributors',[ContributorController::class,'index']);
 Route::get('/contributors/resume/{id}',[ContributorController::class,'showResumeStadistics']);
+Route::get('/contributors/ResumeProducts/{id}',[ContributorController::class,'showProductsStadistics']);
 Route::get('/contributors/{id}',[ContributorController::class,'show']);
 Route::post('/contributors',[ContributorController::class,'store']);
 Route::put('/contributors/{id}',[ContributorController::class,'update']);
@@ -132,3 +135,13 @@ Route::get('/tickets/{id}',[TicketController::class,'show']);
 Route::post('/tickets',[TicketController::class,'store']);
 Route::put('/tickets/{id}',[TicketController::class,'update']);
 Route::delete('/tickets/{id}',[TicketController::class,'destroy']);
+
+// ========================= EndPoints para COSTOS ===============================
+Route::post('/costs',[TicketCostController::class,'store']);
+Route::put('/costs/{id}',[TicketCostController::class,'update']);
+Route::delete('/costs/{id}',[TicketCostController::class,'destroy']);
+
+// ========================= EndPoints para INTERACCIONES ===============================
+Route::post('/interactions',[TicketInteractionController::class,'store']);
+Route::put('/interactions/{id}',[TicketInteractionController::class,'update']);
+Route::delete('/interactions/{id}',[TicketInteractionController::class,'destroy']);
