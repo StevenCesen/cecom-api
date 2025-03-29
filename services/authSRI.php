@@ -43,7 +43,11 @@ if($responseAut===false){
     $comprobanteAutorizacion = $autorizacion['comprobante'];
 
     //  Si el comprobante está autorizado lo guardamos
-    file_put_contents("../public/xml_clients/".$ruc."/"."autorizados/".$clave_acceso.'.xml',base64_decode($data_xml));
+    //LOCAL
+    //file_put_contents("public/xml_clients/".$ruc."/"."autorizados/".$clave_acceso.'.xml',base64_decode($data_xml));
+
+    //PRODUCCION
+    //file_put_contents("../public/xml_clients/".$ruc."/"."autorizados/".$clave_acceso.'.xml',base64_decode($data_xml));
 
     echo json_encode([
         "status"=>200,
@@ -58,7 +62,7 @@ if($responseAut===false){
 }else if($responseAut['RespuestaAutorizacionComprobante']['autorizaciones']['autorizacion']['estado']=='EN PROCESO'){
 
     //  Si el comprobante está autorizado lo guardamos
-    file_put_contents("../public/xml_clients/".$ruc."/"."pendientes/".$clave_acceso.'.xml',base64_decode($data_xml));
+    //file_put_contents("../public/xml_clients/".$ruc."/"."pendientes/".$clave_acceso.'.xml',base64_decode($data_xml));
 
     echo json_encode([
         "status"=>200,
@@ -66,11 +70,11 @@ if($responseAut===false){
         "message"=>'SRI: Comprobante en proceso de autorización.',
         "response"=>$responseAut
     ]);
-
+    
 }else{
 
     //  Si el comprobante está autorizado lo guardamos
-    file_put_contents("../public/xml_clients/".$ruc."/"."no_autorizados/".$clave_acceso.'.xml',base64_decode($data_xml));
+    //file_put_contents("../public/xml_clients/".$ruc."/"."no_autorizados/".$clave_acceso.'.xml',base64_decode($data_xml));
 
     echo json_encode([
         "status"=>400,

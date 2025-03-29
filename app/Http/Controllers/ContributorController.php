@@ -83,13 +83,14 @@ class ContributorController extends Controller
 
     public function showProductsStadistics(){
         DB::statement("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'");
-        
+
         $fecha = date('Y/m',time()-18000);
+
         $results = DB::table('orders as o')
             ->join('itemcarts as i', 'i.order_id', '=', 'o.id')
             ->join('products as p', 'p.id', '=', 'i.item_id')
             ->select(DB::raw('p.name as Producto'), DB::raw('COUNT(i.item_id) as Cantidad'))
-            ->where('o.contributor_id', 6)
+            ->where('o.contributor_id', request('contributor_id'))
             ->whereRaw('o.create_date REGEXP ?', [$fecha]) // Usamos el parámetro en lugar de la cadena directa
             ->groupBy('i.item_id')
             ->orderByRaw('COUNT(i.item_id) DESC')
