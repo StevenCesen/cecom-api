@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 // ========================= EndPoints para CONTRIBUYENTES ===============================
 Route::get('/contributors',[ContributorController::class,'index']);
 Route::get('/contributors/resume/{id}',[ContributorController::class,'showResumeStadistics']);
-Route::get('/contributors/ResumeProducts/{id}',[ContributorController::class,'showProductsStadistics']);
+Route::get('/contributors/ResumeProducts',[ContributorController::class,'showProductsStadistics']);
 Route::get('/contributors/{id}',[ContributorController::class,'show']);
 Route::post('/contributors',[ContributorController::class,'store']);
 Route::put('/contributors/{id}',[ContributorController::class,'update']);
