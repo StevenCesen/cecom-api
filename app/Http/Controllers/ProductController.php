@@ -51,6 +51,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $id)
     {
         $id->update($request->all());
+        
         return response()->json([
             "status"=>200,
             "message"=>"Producto creado correctamente."

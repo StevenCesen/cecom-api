@@ -24,7 +24,7 @@ class VoucherController extends Controller
         $vouchers=$id->find($id->id)
             ->voucher()
             ->orderBy('create_date','DESC')
-            ->paginate(10);
+            ->paginate(30);
         
         foreach($vouchers as $voucher){
             $voucher->client=Client::where('id',$voucher->client_id)->first();
@@ -51,6 +51,58 @@ class VoucherController extends Controller
         }else if($value=='21'){
             return "ENDOSO DE TÍTULOS";
         }
+    }
+
+    public function printAccount(Request $request){
+        $order=Order::where('id',$request->nro_order)->first();
+        $client=Client::where('id',$order->client_id)->first();
+        $itemscart=$order->find($order->id)->itemcart;
+        $contributor=Contributor::where('id',$request->contributor_id)->first();
+
+        $items=[];
+
+        foreach($itemscart as $item){
+            $producto=Product::where('id',$item->item_id)->first();
+
+            array_push($items,[
+                'name'=>$producto->name,
+                'notes'=>$item->notes,
+                'price'=>$producto->precio_unitario,
+                'quantity'=>$item->quantity,
+                'complements'=>"",
+                'item_id'=>$producto->id
+            ]);
+        }
+
+        //  Enviamos a imprimir
+        $data = http_build_query(array(
+            'data'=>json_encode([
+                'commercial_name'=>$contributor->commercial_name,
+                'table'=>$request->client_mesa,
+                'create_date'=>date('Y/m/d H:i:s',time()-18000),
+                'items'=>$items,
+                'nro_order'=>$order->id,
+                'client_name'=>$client->name,
+                'order_number_day'=>"",
+                'contributor'=>$contributor,
+                'context'=>"cuenta"
+            ])
+        ));
+    
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,"https://srv479098.hstgr.cloud/connectvpn.php");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    
+        $resultado= curl_exec($ch);
+        curl_close($ch);
+
+        return response()->json([
+            "status"=>200,
+            "message"=>"Impreso correctamente.",
+        ],200);
+
     }
 
     /**
@@ -228,10 +280,10 @@ class VoucherController extends Controller
         //file_put_contents('../public/ride_clients/'.$contributor->identification.'/'.$request->access_key.'.pdf', $invoice->output());
 
         //PRODUCCION
-        //file_put_contents('ride_clients/'.$contributor->identification.'/'.$request->access_key.'.pdf', $invoice->output());
+        file_put_contents('ride_clients/'.$contributor->identification.'/'.$request->access_key.'.pdf', $invoice->output());
 
         // Enviamos el correo electrónico
-        //Mail::to($request->client_email)->send(new SendMailable);
+        Mail::to($request->client_email)->send(new SendMailable);
         
         if($request->context==='ORDER'){
             //  Damos de baja los items de la comanda
@@ -262,7 +314,6 @@ class VoucherController extends Controller
                         'status_pay'=>'FACTURADO'
                     ]);
                 }
-
             }
 
             $exits_products=Order::where('id',operator: $request->order)->find($request->order)->itemcart()->whereNull('status_pay')->count();
@@ -275,29 +326,29 @@ class VoucherController extends Controller
         }
 
         //  Enviamos a imprimir
-        // $data = http_build_query(array(
-        //     'data'=>json_encode([
-        //         'commercial_name'=>$contributor->commercial_name,
-        //         'table'=>$request->client_mesa,
-        //         'create_date'=>date('Y/m/d H:i:s',time()-18000),
-        //         'items'=>$items,
-        //         'nro_order'=>$create_voucher->id,
-        //         'client_name'=>$request->client_name,
-        //         'order_number_day'=>"",
-        //         'contributor'=>$contributor,
-        //         'context'=>"caja"
-        //     ])
-        // ));
+        $data = http_build_query(array(
+            'data'=>json_encode([
+                'commercial_name'=>$contributor->commercial_name,
+                'table'=>$request->client_mesa,
+                'create_date'=>date('Y/m/d H:i:s',time()-18000),
+                'items'=>$items,
+                'nro_order'=>$create_voucher->id,
+                'client_name'=>$request->client_name,
+                'order_number_day'=>"",
+                'contributor'=>$contributor,
+                'context'=>"caja"
+            ])
+        ));
     
-        // $ch = curl_init();
-        // curl_setopt($ch, CURLOPT_URL,"https://srv479098.hstgr.cloud/connectvpn.php");
-        // curl_setopt($ch, CURLOPT_POST, 1);
-        // curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,"https://srv479098.hstgr.cloud/connectvpn.php");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     
-        // $resultado= curl_exec($ch);
-        // curl_close($ch);
-            
+        $resultado= curl_exec($ch);
+        curl_close($ch);
+
         return response()->json([
             "status"=>200,
             "message"=>"Factura generada correctamente.",
