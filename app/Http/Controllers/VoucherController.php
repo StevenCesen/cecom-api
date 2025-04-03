@@ -82,7 +82,7 @@ class VoucherController extends Controller
                 'create_date'=>date('Y/m/d H:i:s',time()-18000),
                 'items'=>$items,
                 'nro_order'=>$order->id,
-                'client_name'=>$client->name,
+                'client_name'=>$client->client_name,
                 'order_number_day'=>"",
                 'contributor'=>$contributor,
                 'context'=>"cuenta"
