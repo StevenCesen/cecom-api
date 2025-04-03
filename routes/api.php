@@ -17,6 +17,7 @@ use App\Http\Controllers\TicketInteractionController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -93,7 +94,7 @@ Route::post('/sendInvoice',[MailController::class,'sendMail']);
 // ========================= EndPoints para COMANDAS ===============================
 Route::get('/contributors/{id}/ordersmesero',[OrderController::class,'indexMesero']);
 Route::get('/contributors/{id}/orders',[OrderController::class,'index']);
-Route::post('/orders/account',[OrderController::class,'printAccount']);
+Route::post('/orders/account',[VoucherController::class,'printAccount']);
 Route::get('/orders/{id}',[OrderController::class,'show']);
 Route::post('/orders/additems',[OrderController::class,'addItems']);
 Route::post('/orders',[OrderController::class,'store']);
