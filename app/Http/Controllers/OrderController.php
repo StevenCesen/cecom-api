@@ -61,6 +61,7 @@ class OrderController extends Controller
             })
             ->whereIn('status',['PENDIENTE','EN MESA'])
             ->orderBy('create_date','DESC')
+            ->orderBy('status','DESC')
             ->paginate(1000);
         
         foreach($orders as $order){
