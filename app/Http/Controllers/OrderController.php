@@ -60,7 +60,7 @@ class OrderController extends Controller
                 $query->where('user_id','=',request('user_id'));
             })
             ->whereIn('status',['PENDIENTE','EN MESA'])
-            ->orderBy('create_date','DESC')
+            //->orderBy('create_date','DESC')
             ->orderBy('status','DESC')
             ->paginate(1000);
         
