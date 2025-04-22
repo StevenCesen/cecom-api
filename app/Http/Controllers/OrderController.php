@@ -24,7 +24,7 @@ class OrderController extends Controller
                 $query->where('status',request('status'));
             })
             ->when(request()->filled('client_name'),function($query){
-                $query->where('client_name',request('client_name'));
+                $query->where('client_name','REGEXP',request('client_name'));
             })
             ->when(request()->filled('date'),function($query){
                 $query->where('create_date','<=',request('date'));
@@ -59,7 +59,7 @@ class OrderController extends Controller
             ->when(request()->filled('user_id'),function($query){
                 $query->where('user_id','=',request('user_id'));
             })
-            ->whereIn('status',['PENDIENTE'])
+            ->whereIn('status',['PENDIENTE','EN MESA'])
             ->orderBy('create_date','DESC')
             ->paginate(1000);
         
